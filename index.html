@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>엔젤봇 서포트 | 공식 웹사이트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        body { font-family: 'Pretendard', sans-serif; letter-spacing: -0.02em; word-break: keep-all; scroll-behavior: smooth; }
+        .toss-blue { color: #3182f6; }
+        .toss-bg-blue { background-color: #3182f6; }
+        .section-padding { padding: 80px 24px; }
+        
+        /* 모달 스타일 */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); }
+        .modal-content { background: white; margin: 5% auto; padding: 40px; border-radius: 32px; max-width: 600px; max-height: 80vh; overflow-y: auto; position: relative; }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 24px; cursor: pointer; color: #adb5bd; }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+
+    <nav class="sticky top-0 bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
+            <div class="text-xl font-bold toss-blue cursor-pointer" onclick="window.scrollTo(0,0)">엔젤봇 서포트</div>
+            <div class="hidden md:flex gap-8 text-sm font-semibold text-gray-600">
+                <a href="#features" class="hover:text-blue-600">주요 기능</a>
+                <a href="#updates" class="hover:text-blue-600">업데이트</a>
+                <a href="#faq" class="hover:text-blue-600">고객지원</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1466980982916645133&permissions=8&integration_type=0&scope=applications.commands+bot" target="_blank" target="_blank" class="toss-blue font-bold">봇 초대하기</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="section-padding text-center max-w-4xl mx-auto mt-10">
+        <div class="inline-block bg-blue-50 text-blue-600 px-4 py-1 rounded-full text-sm font-bold mb-6">v2.0.4 Update</div>
+        <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-8 text-gray-900">
+            복잡한 서버 관리,<br><span class="toss-blue">엔젤봇 하나로 충분해요</span>
+        </h1>
+        <p class="text-lg text-gray-500 mb-10 font-medium">
+            민원 접수부터 긴급 호출까지, 관리자가 필요했던 모든 기능을<br class="hidden md:block">
+            가장 친절하고 안전한 방식으로 담았습니다.
+        </p>
+        <div class="flex justify-center">
+            <a href="https://discord.com/oauth2/authorize?client_id=1466980982916645133&permissions=8&integration_type=0&scope=applications.commands+bot" target="_blank" class="toss-bg-blue text-white px-12 py-5 rounded-2xl font-bold text-xl hover:brightness-110 shadow-2xl shadow-blue-500/30 transition-all hover:-translate-y-1">
+                지금 바로 초대하기
+            </a>
+        </div>
+    </header>
+
+    <section id="features" class="section-padding bg-gray-50">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12">주요 기능</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold mb-4">📩 익명 민원 접수</h3>
+                    <p class="text-gray-500 leading-relaxed text-sm">유저들의 의견을 관리자 DM으로 안전하게 전달합니다. 불편한 점을 부담 없이 말할 수 있는 환경을 만들어요.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold mb-4">🚨 스마트 호출 시스템</h3>
+                    <p class="text-gray-500 leading-relaxed text-sm">중요한 순간에만 관리자를 찾으세요. 무분별한 호출을 막기 위해 '관리자 확인' 시스템이 작동합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="updates" class="section-padding">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold mb-8 text-center">업데이트 소식</h2>
+            <div class="border-l-4 border-blue-500 pl-8 space-y-12">
+                <div>
+                    <span class="text-blue-600 font-bold text-sm">2026. 04. 16</span>
+                    <h4 class="text-xl font-bold mt-2">v2.0.4 안정화 업데이트</h4>
+                    <p class="text-gray-500 mt-2 text-sm">호출 횟수 제한 로직을 더 정교하게 수정하고, 웹사이트 연동을 준비했습니다.</p>
+                </div>
+                <div>
+                    <span class="text-gray-400 font-bold text-sm">2026. 03. 20</span>
+                    <h4 class="text-xl font-bold mt-2">v2.0.0 민원 시스템 전면 개편</h4>
+                    <p class="text-gray-500 mt-2 text-sm">민원 접수 시 관리자에게 즉시 알림이 가는 기능을 추가했습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="section-padding bg-gray-50">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center">자주 묻는 질문</h2>
+            <div class="space-y-4">
+                <details class="bg-white p-6 rounded-2xl cursor-pointer group">
+                    <summary class="font-bold flex justify-between items-center outline-none">
+                        봇이 작동하지 않아요. 어떻게 하죠?
+                        <span class="group-open:rotate-180 transition-transform">▼</span>
+                    </summary>
+                    <p class="text-gray-500 mt-4 text-sm leading-relaxed">지원 서버에 방문하여 상태 확인을 요청해 주세요. 대부분의 경우 권한 설정 문제입니다.</p>
+                </details>
+                <details class="bg-white p-6 rounded-2xl cursor-pointer group">
+                    <summary class="font-bold flex justify-between items-center outline-none">
+                        명령어 가이드는 어디서 보나요?
+                        <span class="group-open:rotate-180 transition-transform">▼</span>
+                    </summary>
+                    <p class="text-gray-500 mt-4 text-sm leading-relaxed">해당 서버 서버장에게 문의해보세요, 친절한 엔젤봇 서포트가 서버장님의 DM으로 명령어 목록을 보내두었어요!</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t border-gray-100 pt-20 pb-12">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
+                <div>
+                    <h5 class="font-black text-gray-900 mb-6">서비스</h5>
+                    <ul class="space-y-4 text-sm font-semibold text-gray-400">
+                        <li><a href="#" class="hover:text-blue-500 transition">봇 초대하기</a></li>
+                        <li><a href="#features" class="hover:text-blue-500 transition">주요 기능</a></li>
+                        <li><a href="#updates" class="hover:text-blue-500 transition">업데이트 소식</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-black text-gray-900 mb-6">고객지원</h5>
+                    <ul class="space-y-4 text-sm font-semibold text-gray-400">
+                        <li><a href="https://discord.gg/rsEPua5HmT" target="_blank" class="hover:text-blue-500 transition">공식 지원 서버</a></li>
+                        <li><a href="#" class="hover:text-blue-500 transition">명령어 가이드</a></li>
+                        <li><a href="#faq" class="hover:text-blue-500 transition">자주 묻는 질문</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-black text-gray-900 mb-6">법적 고지</h5>
+                    <ul class="space-y-4 text-sm font-semibold text-gray-400">
+                        <li><button onclick="openModal('privacy')" class="hover:text-blue-500 transition">개인정보 처리방침</button></li>
+                        <li><button onclick="openModal('terms')" class="hover:text-blue-500 transition text-left">이용 약관</button></li>
+                        <li><button onclick="openModal('policy')" class="hover:text-blue-500 transition text-left">운영 정책</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-black text-gray-900 mb-6">제작자</h5>
+                    <div class="text-sm font-semibold text-gray-400 space-y-2">
+                        <p class="text-gray-900">Angel Bot System</p>
+                        <p>대표자: 엔젤</p>
+                        <p class="text-xs mt-4">문의: 지원 서버를 이용해 주세요.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-50">
+                <p class="text-xs text-gray-300 font-medium">© 2026 엔젤봇 서포트. All rights reserved.</p>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <span class="text-xs text-gray-300">South Korea</span>
+                    <span class="text-xs text-gray-300 font-bold">Stable Version</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('privacy')">×</span>
+            <h2 class="text-2xl font-bold mb-6">개인정보 처리방침</h2>
+            <div class="text-sm text-gray-500 leading-relaxed space-y-4">
+                <p class="font-bold text-gray-800 underline">데이터는 최소한으로, 보안은 최대한으로.</p>
+                <p>1. 봇은 원활한 민원 전달을 위해 사용자 ID와 서버 ID만을 일시적으로 참조합니다.<br>
+                2. 민원 내용은 관리자에게 전송된 후 봇의 메모리에서 즉시 삭제됩니다.<br>
+                3. 어떠한 경우에도 사용자의 대화 내역을 수집하거나 외부에 판매하지 않습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('terms')">×</span>
+            <h2 class="text-2xl font-bold mb-6">이용 약관</h2>
+            <div class="text-sm text-gray-500 leading-relaxed space-y-4">
+                <p>엔젤봇 서포트를 사용하는 모든 분들은 아래 사항을 지켜주세요.</p>
+                <p>1. 봇을 이용한 무분별한 도배나 서버 테러 행위는 금지됩니다.<br>
+                2. 봇의 기능을 악용하여 다른 사용자를 괴롭히는 경우 이용이 제한될 수 있습니다.<br>
+                3. 서비스의 안정성을 위해 과도한 호출 요청은 봇이 자동으로 차단할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) { document.getElementById(id + 'Modal').style.display = "block"; }
+        function closeModal(id) { document.getElementById(id + 'Modal').style.display = "none"; }
+        
+        // 모달 바깥쪽 클릭하면 닫히게 하는 기능
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
