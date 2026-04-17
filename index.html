@@ -3,190 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>엔젤봇 서포트 | 공식 웹사이트</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <title>엔젤봇 서포트 | 가장 빠른 민원 연결</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
     <style>
-        body { font-family: 'Pretendard', sans-serif; letter-spacing: -0.02em; word-break: keep-all; scroll-behavior: smooth; }
-        .toss-blue { color: #3182f6; }
-        .toss-bg-blue { background-color: #3182f6; }
-        .section-padding { padding: 80px 24px; }
-        
-        /* 모달 스타일 */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); }
-        .modal-content { background: white; margin: 5% auto; padding: 40px; border-radius: 32px; max-width: 600px; max-height: 80vh; overflow-y: auto; position: relative; }
-        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 24px; cursor: pointer; color: #adb5bd; }
+        :root {
+            --toss-blue: #3182f6;
+            --toss-grey: #4e5968;
+            --toss-bg: #f9fafb;
+            --text-main: #191f28;
+            --text-sub: #6b7684;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
+        body { background-color: white; color: var(--text-main); line-height: 1.6; word-break: keep-all; }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 10%; position: sticky; top: 0;
+            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); z-index: 1000;
+        }
+        .logo { font-size: 22px; font-weight: 800; color: var(--toss-blue); text-decoration: none; }
+        .nav-links a { text-decoration: none; color: var(--toss-grey); margin-left: 30px; font-weight: 600; font-size: 15px; cursor: pointer; }
+
+        .hero { padding: 140px 10% 100px; text-align: center; background: linear-gradient(to bottom, #fff, var(--toss-bg)); }
+        .version-tag { background: #e8f3ff; color: var(--toss-blue); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 24px; display: inline-block; }
+        .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.3; margin-bottom: 24px; letter-spacing: -1.5px; }
+        .hero p { font-size: 20px; color: var(--toss-grey); margin-bottom: 44px; }
+        .cta-button { background: var(--toss-blue); color: white; padding: 18px 38px; border-radius: 14px; text-decoration: none; font-size: 18px; font-weight: 700; display: inline-block; transition: 0.2s; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(49, 130, 246, 0.3); }
+
+        .section { padding: 100px 10%; }
+        .section-title { font-size: 32px; font-weight: 800; margin-bottom: 60px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .feature-card { background: var(--toss-bg); padding: 48px; border-radius: 30px; transition: 0.3s; border: 1px solid transparent; }
+        .feature-card:hover { border: 1px solid #e5e8eb; background: white; }
+        .feature-card h3 { font-size: 24px; margin-bottom: 16px; font-weight: 700; }
+        .feature-card p { color: var(--toss-sub); font-size: 17px; }
+
+        .notice-section { padding: 80px 10%; background: white; }
+        .notice-box { border: 1px solid #e5e8eb; border-radius: 24px; padding: 32px; }
+        .notice-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid #f9fafb; }
+        .notice-item:last-child { border: none; }
+
+        .trust-section { background: var(--text-main); color: white; padding: 100px 10%; border-radius: 40px; margin: 0 5% 100px; text-align: center; }
+        .trust-section h2 { font-size: 36px; margin-bottom: 20px; }
+        .trust-section p { color: #8b95a1; font-size: 18px; max-width: 600px; margin: 0 auto; }
+
+        footer { padding: 80px 10%; background: var(--toss-bg); color: var(--toss-sub); }
+        .footer-info p { margin-bottom: 5px; }
+        .footer-links { margin-top: 20px; display: flex; gap: 20px; }
+        .footer-links a { cursor: pointer; font-size: 14px; color: var(--toss-sub); text-decoration: none; font-weight: 600; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+        .modal-content { background: white; margin: 5vh auto; padding: 50px; width: 85%; max-width: 800px; max-height: 80vh; overflow-y: auto; border-radius: 32px; position: relative; }
+        .close-modal { position: absolute; right: 30px; top: 25px; font-size: 30px; cursor: pointer; }
+        .policy-text { white-space: pre-line; font-size: 15px; color: var(--toss-grey); line-height: 1.8; }
+
+        @media (max-width: 768px) { .hero h1 { font-size: 38px; } }
     </style>
 </head>
-<body class="bg-white text-gray-900">
+<body>
 
-    <nav class="sticky top-0 bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
-            <div class="text-xl font-bold toss-blue cursor-pointer" onclick="window.scrollTo(0,0)">엔젤봇 서포트</div>
-            <div class="hidden md:flex gap-8 text-sm font-semibold text-gray-600">
-                <a href="#features" class="hover:text-blue-600">주요 기능</a>
-                <a href="#updates" class="hover:text-blue-600">업데이트</a>
-                <a href="#faq" class="hover:text-blue-600">고객지원</a>
-                <a href="https://discord.com/oauth2/authorize?client_id=1466980982916645133&permissions=8&integration_type=0&scope=applications.commands+bot" target="_blank" target="_blank" class="toss-blue font-bold">봇 초대하기</a>
-            </div>
+<nav>
+    <a href="#" class="logo">Angel Bot Support</a>
+    <div class="nav-links">
+        <a href="#features">주요 기능</a>
+        <a href="#notices">공지사항</a>
+        <a onclick="openModal('privacy')">개인정보처리방침</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="version-tag">서버 관리 지원의 새로운 기준</div>
+    <h1>서버의 모든 목소리를<br>가장 빠르게 연결해요</h1>
+    <p>복잡한 절차 없이 클릭 한 번으로.<br>유저와 대표자를 잇는 엔젤봇 서포트의 직관적인 호출을 경험하세요.</p>
+    <a href="여기에_디스코드_초대링크" class="cta-button">서포트봇 초대하기</a>
+</section>
+
+<section class="section" id="features">
+    <h2 class="section-title">오직 원활한 소통에만<br>집중할 수 있도록</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>📢<br>막힘없는 민원 전달</h3>
+            <p>유저가 겪는 모든 불편함을 상세하게 수집하여 지정된 관리 채널로 즉시 전송해 드려요.</p>
         </div>
-    </nav>
-
-    <header class="section-padding text-center max-w-4xl mx-auto mt-10">
-        <div class="inline-block bg-blue-50 text-blue-600 px-4 py-1 rounded-full text-sm font-bold mb-6">v2.0.4 Update</div>
-        <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-8 text-gray-900">
-            복잡한 서버 관리,<br><span class="toss-blue">엔젤봇 하나로 충분해요</span>
-        </h1>
-        <p class="text-lg text-gray-500 mb-10 font-medium">
-            민원 접수부터 긴급 호출까지, 관리자가 필요했던 모든 기능을<br class="hidden md:block">
-            가장 친절하고 안전한 방식으로 담았습니다.
-        </p>
-        <div class="flex justify-center">
-            <a href="https://discord.com/oauth2/authorize?client_id=1466980982916645133&permissions=8&integration_type=0&scope=applications.commands+bot" target="_blank" class="toss-bg-blue text-white px-12 py-5 rounded-2xl font-bold text-xl hover:brightness-110 shadow-2xl shadow-blue-500/30 transition-all hover:-translate-y-1">
-                지금 바로 초대하기
-            </a>
+        <div class="feature-card">
+            <h3>🔔<br>긴급 대표자 호출</h3>
+            <p>중요한 순간, 망설임 없이 대표자를 바로 호출할 수 있는 전용 시스템을 구축해 드립니다.</p>
         </div>
-    </header>
-
-    <section id="features" class="section-padding bg-gray-50">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl font-bold mb-12">주요 기능</h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
-                    <h3 class="text-xl font-bold mb-4">📩 익명 민원 접수</h3>
-                    <p class="text-gray-500 leading-relaxed text-sm">유저들의 의견을 관리자 DM으로 안전하게 전달합니다. 불편한 점을 부담 없이 말할 수 있는 환경을 만들어요.</p>
-                </div>
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
-                    <h3 class="text-xl font-bold mb-4">🚨 스마트 호출 시스템</h3>
-                    <p class="text-gray-500 leading-relaxed text-sm">중요한 순간에만 관리자를 찾으세요. 무분별한 호출을 막기 위해 '관리자 확인' 시스템이 작동합니다.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="updates" class="section-padding">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl font-bold mb-8 text-center">업데이트 소식</h2>
-            <div class="border-l-4 border-blue-500 pl-8 space-y-12">
-                <div>
-                    <span class="text-blue-600 font-bold text-sm">2026. 04. 16</span>
-                    <h4 class="text-xl font-bold mt-2">v2.0.4 안정화 업데이트</h4>
-                    <p class="text-gray-500 mt-2 text-sm">호출 횟수 제한 로직을 더 정교하게 수정하고, 웹사이트 연동을 준비했습니다.</p>
-                </div>
-                <div>
-                    <span class="text-gray-400 font-bold text-sm">2026. 03. 20</span>
-                    <h4 class="text-xl font-bold mt-2">v2.0.0 민원 시스템 전면 개편</h4>
-                    <p class="text-gray-500 mt-2 text-sm">민원 접수 시 관리자에게 즉시 알림이 가는 기능을 추가했습니다.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="faq" class="section-padding bg-gray-50">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl font-bold mb-12 text-center">자주 묻는 질문</h2>
-            <div class="space-y-4">
-                <details class="bg-white p-6 rounded-2xl cursor-pointer group">
-                    <summary class="font-bold flex justify-between items-center outline-none">
-                        봇이 작동하지 않아요. 어떻게 하죠?
-                        <span class="group-open:rotate-180 transition-transform">▼</span>
-                    </summary>
-                    <p class="text-gray-500 mt-4 text-sm leading-relaxed">지원 서버에 방문하여 상태 확인을 요청해 주세요. 대부분의 경우 권한 설정 문제입니다.</p>
-                </details>
-                <details class="bg-white p-6 rounded-2xl cursor-pointer group">
-                    <summary class="font-bold flex justify-between items-center outline-none">
-                        명령어 가이드는 어디서 보나요?
-                        <span class="group-open:rotate-180 transition-transform">▼</span>
-                    </summary>
-                    <p class="text-gray-500 mt-4 text-sm leading-relaxed">해당 서버 서버장에게 문의해보세요, 친절한 엔젤봇 서포트가 서버장님의 DM으로 명령어 목록을 보내두었어요!</p>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-white border-t border-gray-100 pt-20 pb-12">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
-                <div>
-                    <h5 class="font-black text-gray-900 mb-6">서비스</h5>
-                    <ul class="space-y-4 text-sm font-semibold text-gray-400">
-                        <li><a href="#" class="hover:text-blue-500 transition">봇 초대하기</a></li>
-                        <li><a href="#features" class="hover:text-blue-500 transition">주요 기능</a></li>
-                        <li><a href="#updates" class="hover:text-blue-500 transition">업데이트 소식</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="font-black text-gray-900 mb-6">고객지원</h5>
-                    <ul class="space-y-4 text-sm font-semibold text-gray-400">
-                        <li><a href="https://discord.gg/rsEPua5HmT" target="_blank" class="hover:text-blue-500 transition">공식 지원 서버</a></li>
-                        <li><a href="#" class="hover:text-blue-500 transition">명령어 가이드</a></li>
-                        <li><a href="#faq" class="hover:text-blue-500 transition">자주 묻는 질문</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="font-black text-gray-900 mb-6">법적 고지</h5>
-                    <ul class="space-y-4 text-sm font-semibold text-gray-400">
-                        <li><button onclick="openModal('privacy')" class="hover:text-blue-500 transition">개인정보 처리방침</button></li>
-                        <li><button onclick="openModal('terms')" class="hover:text-blue-500 transition text-left">이용 약관</button></li>
-                        <li><button onclick="openModal('policy')" class="hover:text-blue-500 transition text-left">운영 정책</button></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="font-black text-gray-900 mb-6">제작자</h5>
-                    <div class="text-sm font-semibold text-gray-400 space-y-2">
-                        <p class="text-gray-900">Angel Bot System</p>
-                        <p>대표자: 엔젤</p>
-                        <p class="text-xs mt-4">문의: 지원 서버를 이용해 주세요.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-50">
-                <p class="text-xs text-gray-300 font-medium">© 2026 엔젤봇 서포트. All rights reserved.</p>
-                <div class="flex gap-4 mt-4 md:mt-0">
-                    <span class="text-xs text-gray-300">South Korea</span>
-                    <span class="text-xs text-gray-300 font-bold">Stable Version</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <div id="privacyModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('privacy')">×</span>
-            <h2 class="text-2xl font-bold mb-6">개인정보 처리방침</h2>
-            <div class="text-sm text-gray-500 leading-relaxed space-y-4">
-                <p class="font-bold text-gray-800 underline">데이터는 최소한으로, 보안은 최대한으로.</p>
-                <p>1. 봇은 원활한 민원 전달을 위해 사용자 ID와 서버 ID만을 일시적으로 참조합니다.<br>
-                2. 민원 내용은 관리자에게 전송된 후 봇의 메모리에서 즉시 삭제됩니다.<br>
-                3. 어떠한 경우에도 사용자의 대화 내역을 수집하거나 외부에 판매하지 않습니다.</p>
-            </div>
+        <div class="feature-card">
+            <h3>🛡️<br>안전한 데이터 처리</h3>
+            <p>엔젤봇 서포트는 보안을 최우선으로 생각합니다. 전달되는 모든 메시지는 안전하게 보호됩니다.</p>
         </div>
     </div>
+</section>
 
-    <div id="termsModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('terms')">×</span>
-            <h2 class="text-2xl font-bold mb-6">이용 약관</h2>
-            <div class="text-sm text-gray-500 leading-relaxed space-y-4">
-                <p>엔젤봇 서포트를 사용하는 모든 분들은 아래 사항을 지켜주세요.</p>
-                <p>1. 봇을 이용한 무분별한 도배나 서버 테러 행위는 금지됩니다.<br>
-                2. 봇의 기능을 악용하여 다른 사용자를 괴롭히는 경우 이용이 제한될 수 있습니다.<br>
-                3. 서비스의 안정성을 위해 과도한 호출 요청은 봇이 자동으로 차단할 수 있습니다.</p>
-            </div>
+<section class="notice-section" id="notices">
+    <div class="notice-box">
+        <h2 style="margin-bottom: 24px; font-size: 22px;">공지사항</h2>
+        <div class="notice-item">
+            <span>엔젤봇 서포트 공식 웹사이트 오픈 안내</span>
+            <span style="color: #adb5bd;">2024.04.17</span>
+        </div>
+        <div class="notice-item">
+            <span>민원 처리 시스템 고도화 패치 완료</span>
+            <span style="color: #adb5bd;">2024.04.10</span>
         </div>
     </div>
+</section>
 
-    <script>
-        function openModal(id) { document.getElementById(id + 'Modal').style.display = "block"; }
-        function closeModal(id) { document.getElementById(id + 'Modal').style.display = "none"; }
-        
-        // 모달 바깥쪽 클릭하면 닫히게 하는 기능
-        window.onclick = function(event) {
-            if (event.target.className === 'modal') {
-                event.target.style.display = "none";
-            }
+<section class="trust-section">
+    <h2>안전하게 연결할게요</h2>
+    <p>엔젤봇 서포트는 사용자의 데이터를 소중하게 생각하며,<br>서버의 원활한 소통과 보안만을 위해 최선을 다합니다.</p>
+</section>
+
+<footer>
+    <div class="footer-info">
+        <p><strong>엔젤봇 서포트(Angel Bot Support)</strong></p>
+        <p>대표자: 엔젤</p>
+        <p>고객 문의: <a href="mailto:angelbotsupport@gmail.com" style="color:inherit; text-decoration:none;">angelbotsupport@gmail.com</a></p>
+        <div class="footer-links">
+            <a onclick="openModal('privacy')">개인정보처리방침</a>
+            <a onclick="openModal('terms')">이용약관</a>
+        </div>
+        <p style="margin-top: 20px; font-size: 12px; opacity: 0.6;">© 2024 Angel Bot Support Team. All rights reserved.</p>
+    </div>
+</footer>
+
+<div id="policyModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="modalBody" class="policy-text"></div>
+    </div>
+</div>
+
+<script>
+    function openModal(type) {
+        const modal = document.getElementById('policyModal');
+        const body = document.getElementById('modalBody');
+        if(type === 'privacy') {
+            body.innerHTML = `<h2>개인정보처리방침</h2><br>
+            엔젤봇 서포트 운영팀은 사용자의 개인정보를 소중하게 생각합니다.
+            
+            1. 수집 항목: 디스코드 유저 ID, 서버 ID, 민원 및 호출 메시지 내용.
+            2. 수집 목적: 민원 전달 시스템 운영, 서비스 안정성 확보 및 기능 개선.
+            3. 보유 및 이용기간: 서비스 제공 목적 달성 시 혹은 내부 운영 정책에 따라 즉시 파기.
+            
+            엔젤봇 서포트는 수집된 정보를 어떠한 경우에도 외부 유출하거나 제3자에게 판매하지 않으며, 철저한 보안을 유지합니다.`;
+        } else {
+            body.innerHTML = `<h2>이용약관</h2><br>
+            엔젤봇 서포트 서비스 이용을 환영합니다.
+            
+            1. 사용자는 긴급 호출 기능을 정당한 사유 없이 남용하여 관리 업무를 방해해서는 안 됩니다.
+            2. 봇 사용 과정에서 발생하는 서버 내 모든 갈등에 대해 대표자 및 운영팀은 책임을 지지 않습니다.
+            3. 허위 민원 또는 시스템 오남용 확인 시 서비스 이용이 영구적으로 제한될 수 있습니다.
+            4. 본 이용약관은 최상의 서비스 품질 유지를 위해 예고 없이 변경될 수 있습니다.`;
         }
-    </script>
+        modal.style.display = "block";
+    }
+    function closeModal() { document.getElementById('policyModal').style.display = "none"; }
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('policyModal')) closeModal();
+    }
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>엔젤봇 서포트 | 가장 빠른 민원 연결</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        :root {
+            --toss-blue: #3182f6;
+            --toss-grey: #4e5968;
+            --toss-bg: #f9fafb;
+            --text-main: #191f28;
+            --text-sub: #6b7684;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
+        body { background-color: white; color: var(--text-main); line-height: 1.6; word-break: keep-all; }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 10%; position: sticky; top: 0;
+            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); z-index: 1000;
+        }
+        .logo { font-size: 22px; font-weight: 800; color: var(--toss-blue); text-decoration: none; }
+        .nav-links a { text-decoration: none; color: var(--toss-grey); margin-left: 30px; font-weight: 600; font-size: 15px; cursor: pointer; }
+
+        .hero { padding: 140px 10% 100px; text-align: center; background: linear-gradient(to bottom, #fff, var(--toss-bg)); }
+        .version-tag { background: #e8f3ff; color: var(--toss-blue); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 24px; display: inline-block; }
+        .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.3; margin-bottom: 24px; letter-spacing: -1.5px; }
+        .hero p { font-size: 20px; color: var(--toss-grey); margin-bottom: 44px; }
+        .cta-button { background: var(--toss-blue); color: white; padding: 18px 38px; border-radius: 14px; text-decoration: none; font-size: 18px; font-weight: 700; display: inline-block; transition: 0.2s; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(49, 130, 246, 0.3); }
+
+        .section { padding: 100px 10%; }
+        .section-title { font-size: 32px; font-weight: 800; margin-bottom: 60px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .feature-card { background: var(--toss-bg); padding: 48px; border-radius: 30px; transition: 0.3s; border: 1px solid transparent; }
+        .feature-card:hover { border: 1px solid #e5e8eb; background: white; }
+        .feature-card h3 { font-size: 24px; margin-bottom: 16px; font-weight: 700; }
+        .feature-card p { color: var(--toss-sub); font-size: 17px; }
+
+        .notice-section { padding: 80px 10%; background: white; }
+        .notice-box { border: 1px solid #e5e8eb; border-radius: 24px; padding: 32px; }
+        .notice-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid #f9fafb; }
+        .notice-item:last-child { border: none; }
+
+        .trust-section { background: var(--text-main); color: white; padding: 100px 10%; border-radius: 40px; margin: 0 5% 100px; text-align: center; }
+        .trust-section h2 { font-size: 36px; margin-bottom: 20px; }
+        .trust-section p { color: #8b95a1; font-size: 18px; max-width: 600px; margin: 0 auto; }
+
+        footer { padding: 80px 10%; background: var(--toss-bg); color: var(--toss-sub); }
+        .footer-info p { margin-bottom: 5px; }
+        .footer-links { margin-top: 20px; display: flex; gap: 20px; }
+        .footer-links a { cursor: pointer; font-size: 14px; color: var(--toss-sub); text-decoration: none; font-weight: 600; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+        .modal-content { background: white; margin: 5vh auto; padding: 50px; width: 85%; max-width: 800px; max-height: 80vh; overflow-y: auto; border-radius: 32px; position: relative; }
+        .close-modal { position: absolute; right: 30px; top: 25px; font-size: 30px; cursor: pointer; }
+        .policy-text { white-space: pre-line; font-size: 15px; color: var(--toss-grey); line-height: 1.8; }
+
+        @media (max-width: 768px) { .hero h1 { font-size: 38px; } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="logo">Angel Bot Support</a>
+    <div class="nav-links">
+        <a href="#features">주요 기능</a>
+        <a href="#notices">공지사항</a>
+        <a onclick="openModal('privacy')">개인정보처리방침</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="version-tag">서버 관리 지원의 새로운 기준</div>
+    <h1>서버의 모든 목소리를<br>가장 빠르게 연결해요</h1>
+    <p>복잡한 절차 없이 클릭 한 번으로.<br>유저와 대표자를 잇는 엔젤봇 서포트의 직관적인 호출을 경험하세요.</p>
+    <a href="https://discord.com/oauth2/authorize?client_id=1466980982916645133&permissions=8&integration_type=0&scope=applications.commands+bot" class="cta-button">서포트봇 초대하기</a>
+</section>
+
+<section class="section" id="features">
+    <h2 class="section-title">오직 원활한 소통에만<br>집중할 수 있도록</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>📢<br>막힘없는 민원 전달</h3>
+            <p>유저가 겪는 모든 불편함을 상세하게 수집하여 지정된 관리 채널로 즉시 전송해 드려요.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🔔<br>긴급 대표자 호출</h3>
+            <p>중요한 순간, 망설임 없이 대표자를 바로 호출할 수 있는 전용 시스템을 구축해 드립니다.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🛡️<br>안전한 데이터 처리</h3>
+            <p>엔젤봇 서포트는 보안을 최우선으로 생각합니다. 전달되는 모든 메시지는 안전하게 보호됩니다.</p>
+        </div>
+    </div>
+</section>
+
+<section class="notice-section" id="notices">
+    <div class="notice-box">
+        <h2 style="margin-bottom: 24px; font-size: 22px;">공지사항</h2>
+        <div class="notice-item">
+            <span>엔젤봇 서포트 공식 웹사이트 오픈 안내</span>
+            <span style="color: #adb5bd;">2024.04.17</span>
+        </div>
+        <div class="notice-item">
+            <span>민원 처리 시스템 고도화 패치 완료</span>
+            <span style="color: #adb5bd;">2024.04.10</span>
+        </div>
+    </div>
+</section>
+
+<section class="trust-section">
+    <h2>안전하게 연결할게요</h2>
+    <p>엔젤봇 서포트는 사용자의 데이터를 소중하게 생각하며,<br>서버의 원활한 소통과 보안만을 위해 최선을 다합니다.</p>
+</section>
+
+<footer>
+    <div class="footer-info">
+        <p><strong>엔젤봇 서포트(Angel Bot Support)</strong></p>
+        <p>대표자: 엔젤</p>
+        <p>고객 문의: <a href="mailto:여기에_이메일" style="color:inherit; text-decoration:none;">이메일 주소 입력</a></p>
+        <div class="footer-links">
+            <a onclick="openModal('privacy')">개인정보처리방침</a>
+            <a onclick="openModal('terms')">이용약관</a>
+        </div>
+        <p style="margin-top: 20px; font-size: 12px; opacity: 0.6;">© 2024 Angel Bot Support Team. All rights reserved.</p>
+    </div>
+</footer>
+
+<div id="policyModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="modalBody" class="policy-text"></div>
+    </div>
+</div>
+
+<script>
+    function openModal(type) {
+        const modal = document.getElementById('policyModal');
+        const body = document.getElementById('modalBody');
+        if(type === 'privacy') {
+            body.innerHTML = `<h2>개인정보처리방침</h2><br>
+            엔젤봇 서포트 운영팀은 사용자의 개인정보를 소중하게 생각합니다.
+            
+            1. 수집 항목: 디스코드 유저 ID, 서버 ID, 민원 및 호출 메시지 내용.
+            2. 수집 목적: 민원 전달 시스템 운영, 서비스 안정성 확보 및 기능 개선.
+            3. 보유 및 이용기간: 서비스 제공 목적 달성 시 혹은 내부 운영 정책에 따라 즉시 파기.
+            
+            엔젤봇 서포트는 수집된 정보를 어떠한 경우에도 외부 유출하거나 제3자에게 판매하지 않으며, 철저한 보안을 유지합니다.`;
+        } else {
+            body.innerHTML = `<h2>이용약관</h2><br>
+            엔젤봇 서포트 서비스 이용을 환영합니다.
+            
+            1. 사용자는 긴급 호출 기능을 정당한 사유 없이 남용하여 관리 업무를 방해해서는 안 됩니다.
+            2. 봇 사용 과정에서 발생하는 서버 내 모든 갈등에 대해 대표자 및 운영팀은 책임을 지지 않습니다.
+            3. 허위 민원 또는 시스템 오남용 확인 시 서비스 이용이 영구적으로 제한될 수 있습니다.
+            4. 본 이용약관은 최상의 서비스 품질 유지를 위해 예고 없이 변경될 수 있습니다.`;
+        }
+        modal.style.display = "block";
+    }
+    function closeModal() { document.getElementById('policyModal').style.display = "none"; }
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('policyModal')) closeModal();
+    }
+</script>
+
 </body>
 </html>
