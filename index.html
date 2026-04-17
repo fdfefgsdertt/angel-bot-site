@@ -77,7 +77,7 @@
     <div class="version-tag">서버 관리 지원의 새로운 기준</div>
     <h1>서버의 모든 목소리를<br>가장 빠르게 연결해요</h1>
     <p>복잡한 절차 없이 클릭 한 번으로.<br>유저와 대표자를 잇는 엔젤봇 서포트의 직관적인 호출을 경험하세요.</p>
-    <a href="여기에_디스코드_초대링크" class="cta-button">서포트봇 초대하기</a>
+    <a href="https://discord.com/oauth2/authorize?client_id=1466980982916645133&permissions=8&integration_type=0&scope=applications.commands+bot" class="cta-button">서포트봇 초대하기</a>
 </section>
 
 <section class="section" id="features">
@@ -85,11 +85,11 @@
     <div class="feature-grid">
         <div class="feature-card">
             <h3>📢<br>막힘없는 민원 전달</h3>
-            <p>유저가 겪는 모든 불편함을 상세하게 수집하여 지정된 관리 채널로 즉시 전송해 드려요.</p>
+            <p>유저가 겪는 모든 불편함을 상세하게 수집하여 설정된 역할로 즉시 전송해 드려요.</p>
         </div>
         <div class="feature-card">
-            <h3>🔔<br>긴급 대표자 호출</h3>
-            <p>중요한 순간, 망설임 없이 대표자를 바로 호출할 수 있는 전용 시스템을 구축해 드립니다.</p>
+            <h3>🔔<br>긴급 서버장 호출</h3>
+            <p>중요한 순간, 망설임 없이 서버장를 바로 호출할 수 있어요.</p>
         </div>
         <div class="feature-card">
             <h3>🛡️<br>안전한 데이터 처리</h3>
@@ -122,176 +122,6 @@
         <p><strong>엔젤봇 서포트(Angel Bot Support)</strong></p>
         <p>대표자: 엔젤</p>
         <p>고객 문의: <a href="mailto:angelbotsupport@gmail.com" style="color:inherit; text-decoration:none;">angelbotsupport@gmail.com</a></p>
-        <div class="footer-links">
-            <a onclick="openModal('privacy')">개인정보처리방침</a>
-            <a onclick="openModal('terms')">이용약관</a>
-        </div>
-        <p style="margin-top: 20px; font-size: 12px; opacity: 0.6;">© 2024 Angel Bot Support Team. All rights reserved.</p>
-    </div>
-</footer>
-
-<div id="policyModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <div id="modalBody" class="policy-text"></div>
-    </div>
-</div>
-
-<script>
-    function openModal(type) {
-        const modal = document.getElementById('policyModal');
-        const body = document.getElementById('modalBody');
-        if(type === 'privacy') {
-            body.innerHTML = `<h2>개인정보처리방침</h2><br>
-            엔젤봇 서포트 운영팀은 사용자의 개인정보를 소중하게 생각합니다.
-            
-            1. 수집 항목: 디스코드 유저 ID, 서버 ID, 민원 및 호출 메시지 내용.
-            2. 수집 목적: 민원 전달 시스템 운영, 서비스 안정성 확보 및 기능 개선.
-            3. 보유 및 이용기간: 서비스 제공 목적 달성 시 혹은 내부 운영 정책에 따라 즉시 파기.
-            
-            엔젤봇 서포트는 수집된 정보를 어떠한 경우에도 외부 유출하거나 제3자에게 판매하지 않으며, 철저한 보안을 유지합니다.`;
-        } else {
-            body.innerHTML = `<h2>이용약관</h2><br>
-            엔젤봇 서포트 서비스 이용을 환영합니다.
-            
-            1. 사용자는 긴급 호출 기능을 정당한 사유 없이 남용하여 관리 업무를 방해해서는 안 됩니다.
-            2. 봇 사용 과정에서 발생하는 서버 내 모든 갈등에 대해 대표자 및 운영팀은 책임을 지지 않습니다.
-            3. 허위 민원 또는 시스템 오남용 확인 시 서비스 이용이 영구적으로 제한될 수 있습니다.
-            4. 본 이용약관은 최상의 서비스 품질 유지를 위해 예고 없이 변경될 수 있습니다.`;
-        }
-        modal.style.display = "block";
-    }
-    function closeModal() { document.getElementById('policyModal').style.display = "none"; }
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('policyModal')) closeModal();
-    }
-</script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>엔젤봇 서포트 | 가장 빠른 민원 연결</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
-    <style>
-        :root {
-            --toss-blue: #3182f6;
-            --toss-grey: #4e5968;
-            --toss-bg: #f9fafb;
-            --text-main: #191f28;
-            --text-sub: #6b7684;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
-        body { background-color: white; color: var(--text-main); line-height: 1.6; word-break: keep-all; }
-
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 10%; position: sticky; top: 0;
-            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); z-index: 1000;
-        }
-        .logo { font-size: 22px; font-weight: 800; color: var(--toss-blue); text-decoration: none; }
-        .nav-links a { text-decoration: none; color: var(--toss-grey); margin-left: 30px; font-weight: 600; font-size: 15px; cursor: pointer; }
-
-        .hero { padding: 140px 10% 100px; text-align: center; background: linear-gradient(to bottom, #fff, var(--toss-bg)); }
-        .version-tag { background: #e8f3ff; color: var(--toss-blue); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 24px; display: inline-block; }
-        .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.3; margin-bottom: 24px; letter-spacing: -1.5px; }
-        .hero p { font-size: 20px; color: var(--toss-grey); margin-bottom: 44px; }
-        .cta-button { background: var(--toss-blue); color: white; padding: 18px 38px; border-radius: 14px; text-decoration: none; font-size: 18px; font-weight: 700; display: inline-block; transition: 0.2s; }
-        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(49, 130, 246, 0.3); }
-
-        .section { padding: 100px 10%; }
-        .section-title { font-size: 32px; font-weight: 800; margin-bottom: 60px; }
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-        .feature-card { background: var(--toss-bg); padding: 48px; border-radius: 30px; transition: 0.3s; border: 1px solid transparent; }
-        .feature-card:hover { border: 1px solid #e5e8eb; background: white; }
-        .feature-card h3 { font-size: 24px; margin-bottom: 16px; font-weight: 700; }
-        .feature-card p { color: var(--toss-sub); font-size: 17px; }
-
-        .notice-section { padding: 80px 10%; background: white; }
-        .notice-box { border: 1px solid #e5e8eb; border-radius: 24px; padding: 32px; }
-        .notice-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid #f9fafb; }
-        .notice-item:last-child { border: none; }
-
-        .trust-section { background: var(--text-main); color: white; padding: 100px 10%; border-radius: 40px; margin: 0 5% 100px; text-align: center; }
-        .trust-section h2 { font-size: 36px; margin-bottom: 20px; }
-        .trust-section p { color: #8b95a1; font-size: 18px; max-width: 600px; margin: 0 auto; }
-
-        footer { padding: 80px 10%; background: var(--toss-bg); color: var(--toss-sub); }
-        .footer-info p { margin-bottom: 5px; }
-        .footer-links { margin-top: 20px; display: flex; gap: 20px; }
-        .footer-links a { cursor: pointer; font-size: 14px; color: var(--toss-sub); text-decoration: none; font-weight: 600; }
-
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
-        .modal-content { background: white; margin: 5vh auto; padding: 50px; width: 85%; max-width: 800px; max-height: 80vh; overflow-y: auto; border-radius: 32px; position: relative; }
-        .close-modal { position: absolute; right: 30px; top: 25px; font-size: 30px; cursor: pointer; }
-        .policy-text { white-space: pre-line; font-size: 15px; color: var(--toss-grey); line-height: 1.8; }
-
-        @media (max-width: 768px) { .hero h1 { font-size: 38px; } }
-    </style>
-</head>
-<body>
-
-<nav>
-    <a href="#" class="logo">Angel Bot Support</a>
-    <div class="nav-links">
-        <a href="#features">주요 기능</a>
-        <a href="#notices">공지사항</a>
-        <a onclick="openModal('privacy')">개인정보처리방침</a>
-    </div>
-</nav>
-
-<section class="hero">
-    <div class="version-tag">서버 관리 지원의 새로운 기준</div>
-    <h1>서버의 모든 목소리를<br>가장 빠르게 연결해요</h1>
-    <p>복잡한 절차 없이 클릭 한 번으로.<br>유저와 대표자를 잇는 엔젤봇 서포트의 직관적인 호출을 경험하세요.</p>
-    <a href="https://discord.com/oauth2/authorize?client_id=1466980982916645133&permissions=8&integration_type=0&scope=applications.commands+bot" class="cta-button">서포트봇 초대하기</a>
-</section>
-
-<section class="section" id="features">
-    <h2 class="section-title">오직 원활한 소통에만<br>집중할 수 있도록</h2>
-    <div class="feature-grid">
-        <div class="feature-card">
-            <h3>📢<br>막힘없는 민원 전달</h3>
-            <p>유저가 겪는 모든 불편함을 상세하게 수집하여 지정된 관리 채널로 즉시 전송해 드려요.</p>
-        </div>
-        <div class="feature-card">
-            <h3>🔔<br>긴급 대표자 호출</h3>
-            <p>중요한 순간, 망설임 없이 대표자를 바로 호출할 수 있는 전용 시스템을 구축해 드립니다.</p>
-        </div>
-        <div class="feature-card">
-            <h3>🛡️<br>안전한 데이터 처리</h3>
-            <p>엔젤봇 서포트는 보안을 최우선으로 생각합니다. 전달되는 모든 메시지는 안전하게 보호됩니다.</p>
-        </div>
-    </div>
-</section>
-
-<section class="notice-section" id="notices">
-    <div class="notice-box">
-        <h2 style="margin-bottom: 24px; font-size: 22px;">공지사항</h2>
-        <div class="notice-item">
-            <span>엔젤봇 서포트 공식 웹사이트 오픈 안내</span>
-            <span style="color: #adb5bd;">2024.04.17</span>
-        </div>
-        <div class="notice-item">
-            <span>민원 처리 시스템 고도화 패치 완료</span>
-            <span style="color: #adb5bd;">2024.04.10</span>
-        </div>
-    </div>
-</section>
-
-<section class="trust-section">
-    <h2>안전하게 연결할게요</h2>
-    <p>엔젤봇 서포트는 사용자의 데이터를 소중하게 생각하며,<br>서버의 원활한 소통과 보안만을 위해 최선을 다합니다.</p>
-</section>
-
-<footer>
-    <div class="footer-info">
-        <p><strong>엔젤봇 서포트(Angel Bot Support)</strong></p>
-        <p>대표자: 엔젤</p>
-        <p>고객 문의: <a href="mailto:여기에_이메일" style="color:inherit; text-decoration:none;">이메일 주소 입력</a></p>
         <div class="footer-links">
             <a onclick="openModal('privacy')">개인정보처리방침</a>
             <a onclick="openModal('terms')">이용약관</a>
