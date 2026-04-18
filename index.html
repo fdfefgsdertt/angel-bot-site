@@ -12,6 +12,7 @@
             --toss-bg: #f9fafb;
             --text-main: #191f28;
             --text-sub: #6b7684;
+            --border-grey: #e5e8eb;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
@@ -34,19 +35,20 @@
         .cta-button { padding: 18px 32px; border-radius: 14px; text-decoration: none; font-size: 18px; font-weight: 700; transition: 0.2s; }
         .btn-blue { background: var(--toss-blue); color: white; }
         .btn-grey { background: #e5e8eb; color: var(--toss-grey); }
-        .cta-button:hover { transform: translateY(-2px); opacity: 0.9; }
 
         .section { padding: 100px 10%; }
-        .section-title { font-size: 32px; font-weight: 800; margin-bottom: 60px; }
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-        .feature-card { background: var(--toss-bg); padding: 48px; border-radius: 30px; transition: 0.3s; }
-        .feature-card h3 { font-size: 24px; margin-bottom: 16px; font-weight: 700; }
-        .feature-card p { color: var(--toss-sub); font-size: 17px; }
+        .section-title { font-size: 32px; font-weight: 800; margin-bottom: 60px; text-align: center; }
 
-        .notice-section { padding: 80px 10%; background: white; }
-        .notice-box { border: 1px solid #e5e8eb; border-radius: 24px; padding: 32px; }
-        .notice-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid #f9fafb; }
-        .notice-item:last-child { border: none; }
+        /* FAQ 스타일 */
+        .faq-section { background-color: white; padding-bottom: 100px; }
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--border-grey); }
+        .faq-question { padding: 24px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: 700; color: var(--text-main); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; color: var(--toss-grey); font-size: 16px; padding-bottom: 0; }
+        .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 24px; }
+        .faq-item.active .faq-question { color: var(--toss-blue); }
+        .faq-icon { transition: transform 0.3s; font-size: 12px; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
 
         .trust-section { background: var(--text-main); color: white; padding: 100px 10%; border-radius: 40px; margin: 0 5% 100px; text-align: center; }
 
@@ -54,18 +56,11 @@
         .footer-links { margin: 20px 0; display: flex; gap: 20px; }
         .footer-links a { cursor: pointer; font-size: 14px; color: var(--text-sub); text-decoration: none; font-weight: 600; }
 
-        /* 모달 스타일 */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
         .modal-content { background: white; margin: 5vh auto; padding: 50px; width: 90%; max-width: 800px; max-height: 85vh; overflow-y: auto; border-radius: 32px; position: relative; }
-        .close-modal { position: absolute; right: 30px; top: 25px; font-size: 30px; cursor: pointer; color: var(--text-sub); }
-        .policy-content { text-align: left; font-size: 14px; line-height: 1.8; color: var(--toss-grey); }
-        .policy-content strong { color: var(--text-main); }
+        .close-modal { position: absolute; right: 30px; top: 25px; font-size: 30px; cursor: pointer; }
 
-        @media (max-width: 768px) { 
-            .hero h1 { font-size: 38px; } 
-            .cta-button { width: 100%; }
-            .modal-content { padding: 30px 20px; width: 95%; }
-        }
+        @media (max-width: 768px) { .hero h1 { font-size: 36px; } .cta-button { width: 100%; } .modal-content { padding: 30px 20px; } }
     </style>
 </head>
 <body>
@@ -74,7 +69,7 @@
     <a href="#" class="logo">Angel Bot Support</a>
     <div class="nav-links">
         <a href="#features">주요 기능</a>
-        <a href="#notices">공지사항</a>
+        <a href="#faq">FAQ</a>
         <a onclick="openModal('privacy')">개인정보처리방침</a>
     </div>
 </nav>
@@ -83,42 +78,35 @@
     <div class="version-tag">서버 관리 지원의 새로운 기준</div>
     <h1>서버의 모든 목소리를<br>가장 빠르게 연결해요</h1>
     <p>복잡한 절차 없이 클릭 한 번으로.<br>유저와 서버장을 잇는 엔젤봇 서포트를 경험하세요.</p>
-    
     <div class="cta-group">
         <a href="https://discord.com/oauth2/authorize?client_id=1466980982916645133&permissions=8&integration_type=0&scope=applications.commands+bot" class="cta-button btn-blue">서포트봇 초대하기</a>
         <a href="https://discord.gg/rsEPua5HmT" class="cta-button btn-grey">공식 지원 서버</a>
     </div>
 </section>
 
-<section class="section" id="features">
-    <h2 class="section-title">오직 원활한 소통에만<br>집중할 수 있도록</h2>
-    <div class="feature-grid">
-        <div class="feature-card">
-            <h3>📢<br>막힘없는 민원 전달</h3>
-            <p>유저가 겪는 모든 불편함을 상세하게 수집하여 지정된 관리 채널로 즉시 전송해 드려요.</p>
-        </div>
-        <div class="feature-card">
-            <h3>🔔<br>긴급 서버장 호출</h3>
-            <p>중요한 순간, 망설임 없이 서버장을 바로 호출할 수 있는 전용 시스템을 구축했어요.</p>
-        </div>
-        <div class="feature-card">
-            <h3>🛡️<br>안전한 데이터 처리</h3>
-            <p>엔젤봇 서포트는 보안을 최우선으로 생각합니다. 모든 메시지는 안전하게 보호된답니다.</p>
-        </div>
-    </div>
-</section>
-
-<section class="notice-section" id="notices">
-    <div class="notice-box">
-        <h2 style="margin-bottom: 24px; font-size: 22px;">공지사항</h2>
-        <div class="notice-item">
-            <span>엔젤봇 서포트 공식 웹사이트 오픈 안내</span>
-            <span style="color: #adb5bd;">2026.04.17</span>
-        </div>
-        <div class="notice-item">
-            <span>공식 지원 서버 채널 오픈</span>
-            <span style="color: #adb5bd;">2026.01.04</span>
-        </div>
+<section class="section faq-section" id="faq">
+    <h2 class="section-title">자주 묻는 질문</h2>
+    <div class="faq-container">
+        <div class="faq-item"><div class="faq-question">엔젤봇 서포트는 어떤 서비스인가요? <span class="faq-icon">▼</span></div><div class="faq-answer">서버 유저가 민원을 넣거나 서버장을 호출할 때, 그 메시지를 관리 채널로 깔끔하게 정리해 전달해주는 소통 지원 도구입니다.</div></div>
+        <div class="faq-item"><div class="faq-question">봇 초대 비용은 무료인가요? <span class="faq-icon">▼</span></div><div class="faq-answer">네, 엔젤봇 서포트의 핵심 기능은 누구나 무료로 이용하실 수 있습니다.</div></div>
+        <div class="faq-item"><div class="faq-question">민원 수신 채널은 어떻게 설정하나요? <span class="faq-icon">▼</span></div><div class="faq-answer">명령어(/설정)를 통해 민원을 전송받을 전용 채널을 지정하실 수 있습니다.</div></div>
+        <div class="faq-item"><div class="faq-question">서버장 호출 기능에 쿨타임이 있나요? <span class="faq-icon">▼</span></div><div class="faq-answer">네, 무분별한 호출 방지를 위해 기본적으로 쿨타임이 적용되어 있으며 관리자가 조절 가능합니다.</div></div>
+        <div class="faq-item"><div class="faq-question">봇이 오프라인일 때는 어떻게 하나요? <span class="faq-icon">▼</span></div><div class="faq-answer">현재 24시간 호스팅 서비스를 사용 중이나, 업데이트 시 일시적으로 오프라인이 될 수 있습니다. 잠시 후 다시 시도해 주세요.</div></div>
+        <div class="faq-item"><div class="faq-question">모바일 디스코드에서도 작동하나요? <span class="faq-icon">▼</span></div><div class="faq-answer">네, 슬래시 명령어(/) 기반으로 제작되어 PC와 모바일 모두 동일하게 지원합니다.</div></div>
+        <div class="faq-item"><div class="faq-question">슬래시 명령어가 뜨지 않아요. <span class="faq-icon">▼</span></div><div class="faq-answer">봇에게 '애플리케이션 명령어 사용' 권한이 있는지 확인해 주세요. 봇을 다시 초대하는 것도 방법입니다.</div></div>
+        <div class="faq-item"><div class="faq-question">서버 유저 수에 제한이 있나요? <span class="faq-icon">▼</span></div><div class="faq-answer">아니요, 대규모 서버부터 소규모 친목 서버까지 인원 제한 없이 이용 가능합니다.</div></div>
+        <div class="faq-item"><div class="faq-question">봇 이름을 변경해도 되나요? <span class="faq-icon">▼</span></div><div class="faq-answer">네, 서버 내에서 별명을 변경하여 사용하셔도 기능에는 지장이 없습니다.</div></div>
+        <div class="faq-item"><div class="faq-question">민원 내용에 이미지도 포함되나요? <span class="faq-icon">▼</span></div><div class="faq-answer">현재 텍스트 기반 민원 전달을 우선 지원하며, 이미지 첨부 기능은 추후 업데이트 예정입니다.</div></div>
+        <div class="faq-item"><div class="faq-question">개인정보는 안전하게 보호되나요? <span class="faq-icon">▼</span></div><div class="faq-answer">전달되는 모든 데이터는 암호화되어 처리되며, 목적 달성 시 즉시 파기됩니다. 유출 사고 0건을 유지 중입니다.</div></div>
+        <div class="faq-item"><div class="faq-question">로그 데이터가 남나요? <span class="faq-icon">▼</span></div><div class="faq-answer">서비스 개선과 오류 추적을 위한 최소한의 이용 로그만 기록하며, 상세 내용은 공개되지 않습니다.</div></div>
+        <div class="faq-item"><div class="faq-question">봇을 강퇴하면 데이터는 어떻게 되나요? <span class="faq-icon">▼</span></div><div class="faq-answer">봇이 서버에서 나가면 해당 서버와 관련된 설정 데이터는 안전하게 삭제됩니다.</div></div>
+        <div class="faq-item"><div class="faq-question">개발팀은 몇 명인가요? <span class="faq-icon">▼</span></div><div class="faq-answer">엔젤봇 서포트 운영팀과 대표자 엔젤이 함께 서비스를 운영 및 관리하고 있습니다.</div></div>
+        <div class="faq-item"><div class="faq-question">커스텀 기능 요청이 가능한가요? <span class="faq-icon">▼</span></div><div class="faq-answer">공식 지원 서버를 통해 제안해 주시면 검토 후 반영해 드리고 있습니다.</div></div>
+        <div class="faq-item"><div class="faq-question">유료 플랜 도입 계획이 있나요? <span class="faq-icon">▼</span></div><div class="faq-answer">현재는 모든 기능을 무료로 제공하는 데 집중하고 있으며, 유료화 계획은 미정입니다.</div></div>
+        <div class="faq-item"><div class="faq-question">봇 초대가 안 돼요. <span class="faq-icon">▼</span></div><div class="faq-answer">서버 관리 권한이 있는지 확인해 주세요. 지속될 경우 공식 지원 서버에 문의 바랍니다.</div></div>
+        <div class="faq-item"><div class="faq-question">지원하는 언어는 무엇인가요? <span class="faq-icon">▼</span></div><div class="faq-answer">현재 한국어를 공식 지원하며, 추후 글로벌 서비스를 위해 영어 지원을 검토 중입니다.</div></div>
+        <div class="faq-item"><div class="faq-question">오픈 소스인가요? <span class="faq-icon">▼</span></div><div class="faq-answer">엔젤봇 서포트의 소스코드는 보안상의 이유로 비공개로 운영되고 있습니다.</div></div>
+        <div class="faq-item"><div class="faq-question">공식 지원 서버 링크가 만료되었어요. <span class="faq-icon">▼</span></div><div class="faq-answer">홈페이지 하단의 '공식 디스코드' 링크를 클릭하시면 항상 최신 초대 링크로 연결됩니다.</div></div>
     </div>
 </section>
 
@@ -144,72 +132,47 @@
 <div id="policyModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal()">&times;</span>
-        <div id="modalBody" class="policy-content"></div>
+        <div id="modalBody" style="text-align: left; font-size: 14px; line-height: 1.8;"></div>
     </div>
 </div>
 
 <script>
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        item.querySelector('.faq-question').addEventListener('click', () => {
+            item.classList.toggle('active');
+        });
+    });
+
     function openModal(type) {
         const modal = document.getElementById('policyModal');
         const body = document.getElementById('modalBody');
-        
         if(type === 'privacy') {
             body.innerHTML = `
                 <h2 style="font-size: 26px; color: #191f28; margin-bottom: 10px;">개인정보처리방침</h2>
                 <p style="color: #3182f6; font-weight: 700; margin-bottom: 25px;">보안 사고 및 개인정보 유출 사례 0건 (2026년 기준)</p>
-                
-                <strong>제1조 (목적)</strong><br>
-                엔젤봇 서포트("이하 회사")는 이용자의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 다음과 같은 처리방침을 수립·공개합니다.<br><br>
-                
-                <strong>제2조 (수집 항목 및 방법)</strong><br>
-                회사는 서비스 제공을 위해 최소한의 개인정보를 수집합니다.<br>
-                1. 수집 항목: 디스코드 ID, 서버 식별번호(Guild ID), 서비스 이용 로그, 민원 텍스트 데이터<br>
-                2. 방법: 디스코드 API 연동을 통한 자동 수집<br><br>
-                
-                <strong>제3조 (처리 목적)</strong><br>
-                1. 서비스 운영: 서버별 민원 전달 및 서버장 호출 시스템 작동<br>
-                2. 보안 관리: 악의적 이용자 차단 및 시스템 보안 강화<br><br>
-                
-                <strong>제4조 (개인정보의 보유 및 파기)</strong><br>
-                회사는 이용자의 파기 요청 시 혹은 서비스 종료 시까지 정보를 보유하며, 목적 달성 시 복구가 불가능한 방법으로 즉시 파기합니다.<br><br>
-                
-                <strong>제5조 (정보 주체의 권리)</strong><br>
-                이용자는 언제든지 본인의 데이터 삭제를 요청할 수 있으며, 회사는 이에 지체 없이 응대할 의무가 있습니다.<br><br>
-                
-                <strong>제6조 (보안 책임)</strong><br>
-                회사는 창립 이래 <strong>단 한 건의 보안 유출 사고도 발생하지 않았음을 증명</strong>하며, 모든 데이터는 최신 암호화 기술을 통해 안전하게 관리되고 있습니다.
+                <strong>제1조 (목적)</strong><br>엔젤봇 서포트 운영팀(이하 "회사")은 이용자의 개인정보를 보호하고 이와 관련한 고충을 신속하게 처리하기 위해 방침을 수립합니다.<br><br>
+                <strong>제2조 (수집 항목)</strong><br>1. 수집 항목: 디스코드 ID, 서버 식별번호, 메시지 로그.<br>2. 수집 방법: API 연동을 통한 자동 생성.<br><br>
+                <strong>제3조 (처리 목적)</strong><br>민원 전달 시스템 운영 및 서비스 보안 강화, 이용자 식별을 목적으로 합니다.<br><br>
+                <strong>제4조 (보유 기간)</strong><br>이용자의 파기 요청 시 혹은 서비스 종료 시까지 보유하며, 목적 달성 시 즉시 파기합니다.<br><br>
+                <strong>제5조 (정보 주체의 권리)</strong><br>이용자는 언제든지 데이터 삭제를 요청할 수 있으며 회사는 이에 응대할 의무가 있습니다.<br><br>
+                <strong>제6조 (보안 책임)</strong><br>회사는 현재까지 <strong>단 한 건의 보안 유출 사고도 발생하지 않았음을 보증</strong>하며 철저히 관리합니다.
             `;
         } else {
             body.innerHTML = `
                 <h2 style="font-size: 26px; color: #191f28; margin-bottom: 25px;">서비스 이용약관</h2>
-                
-                <strong>제1조 (목적)</strong><br>
-                본 약관은 "엔젤봇 서포트"(이하 "회사")가 제공하는 서비스 이용과 관련하여 회사와 이용자 간의 권리, 의무 및 책임 사항을 규정함을 목적으로 합니다.<br><br>
-                
-                <strong>제2조 (서비스의 이용 제한)</strong><br>
-                회사는 다음 각 호에 해당하는 경우 이용자의 서비스 이용을 즉시 제한하거나 영구 차단할 수 있습니다.<br>
-                1. 정당한 사유 없이 호출 기능을 남용하여 운영진의 업무를 방해하는 행위<br>
-                2. 타인의 정보를 도용하거나 허위 민원을 유포하는 행위<br>
-                3. 시스템 취약점을 공격하거나 비정상적인 방법으로 봇을 작동시키는 행위<br><br>
-                
-                <strong>제3조 (회사의 면책)</strong><br>
-                1. 회사는 천재지변 또는 디스코드 서비스 자체의 장애로 인해 발생한 서비스 중단에 대해 책임을 지지 않습니다.<br>
-                2. 이용자 간의 분쟁 혹은 서버 내 갈등에 대해서는 어떠한 책임도 부담하지 않습니다.<br><br>
-                
-                <strong>제4조 (약관의 변경)</strong><br>
-                회사는 최상의 서비스 품질 유지를 위해 본 약관을 예고 없이 변경할 수 있으며, 변경된 약관은 본 웹사이트 공지사항을 통해 공지함으로써 효력이 발생합니다.
+                <strong>제1조 (목적)</strong><br>본 약관은 "엔젤봇 서포트"(이하 "회사") 서비스 이용 조건 및 절차 규정을 목적으로 합니다.<br><br>
+                <strong>제2조 (이용 제한)</strong><br>1. 호출 기능 남용으로 업무를 방해하는 행위.<br>2. 허위 사실 유포 및 시스템 공격 행위 시 차단될 수 있습니다.<br><br>
+                <strong>제3조 (회사의 의무)</strong><br>회사는 안정적인 서비스 제공과 개인정보 보호를 위해 최선의 노력을 다합니다.<br><br>
+                <strong>제4조 (책임 제한)</strong><br>천재지변이나 디스코드 플랫폼 자체 장애로 인한 서비스 중단에는 책임을 지지 않습니다.<br><br>
+                <strong>제5조 (관할 법원)</strong><br>서비스 관련 분쟁 발생 시 회사의 소재지 관할 법원을 전용 관할 법원으로 합니다.
             `;
         }
         modal.style.display = "block";
     }
 
-    function closeModal() { 
-        document.getElementById('policyModal').style.display = "none"; 
-    }
-
-    window.onclick = function(event) { 
-        if (event.target == document.getElementById('policyModal')) closeModal(); 
-    }
+    function closeModal() { document.getElementById('policyModal').style.display = "none"; }
+    window.onclick = function(event) { if (event.target == document.getElementById('policyModal')) closeModal(); }
 </script>
 
 </body>
