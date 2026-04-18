@@ -30,7 +30,6 @@
         .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.3; margin-bottom: 24px; letter-spacing: -1.5px; }
         .hero p { font-size: 20px; color: var(--toss-grey); margin-bottom: 44px; }
         
-        /* 버튼 그룹 레이아웃 */
         .cta-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
         .cta-button { padding: 18px 32px; border-radius: 14px; text-decoration: none; font-size: 18px; font-weight: 700; transition: 0.2s; }
         .btn-blue { background: var(--toss-blue); color: white; }
@@ -55,13 +54,17 @@
         .footer-links { margin: 20px 0; display: flex; gap: 20px; }
         .footer-links a { cursor: pointer; font-size: 14px; color: var(--text-sub); text-decoration: none; font-weight: 600; }
 
+        /* 모달 스타일 */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
-        .modal-content { background: white; margin: 5vh auto; padding: 50px; width: 85%; max-width: 800px; max-height: 80vh; overflow-y: auto; border-radius: 32px; position: relative; }
-        .close-modal { position: absolute; right: 30px; top: 25px; font-size: 30px; cursor: pointer; }
+        .modal-content { background: white; margin: 5vh auto; padding: 50px; width: 90%; max-width: 800px; max-height: 85vh; overflow-y: auto; border-radius: 32px; position: relative; }
+        .close-modal { position: absolute; right: 30px; top: 25px; font-size: 30px; cursor: pointer; color: var(--text-sub); }
+        .policy-content { text-align: left; font-size: 14px; line-height: 1.8; color: var(--toss-grey); }
+        .policy-content strong { color: var(--text-main); }
 
         @media (max-width: 768px) { 
             .hero h1 { font-size: 38px; } 
             .cta-button { width: 100%; }
+            .modal-content { padding: 30px 20px; width: 95%; }
         }
     </style>
 </head>
@@ -79,7 +82,7 @@
 <section class="hero">
     <div class="version-tag">서버 관리 지원의 새로운 기준</div>
     <h1>서버의 모든 목소리를<br>가장 빠르게 연결해요</h1>
-    <p>복잡한 절차 없이 클릭 한 번으로.<br>유저와 서버장를 잇는 엔젤봇 서포트를 경험하세요.</p>
+    <p>복잡한 절차 없이 클릭 한 번으로.<br>유저와 서버장을 잇는 엔젤봇 서포트를 경험하세요.</p>
     
     <div class="cta-group">
         <a href="https://discord.com/oauth2/authorize?client_id=1466980982916645133&permissions=8&integration_type=0&scope=applications.commands+bot" class="cta-button btn-blue">서포트봇 초대하기</a>
@@ -141,7 +144,7 @@
 <div id="policyModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal()">&times;</span>
-        <div id="modalBody" class="policy-text" style="white-space: pre-line;"></div>
+        <div id="modalBody" class="policy-content"></div>
     </div>
 </div>
 
@@ -149,15 +152,64 @@
     function openModal(type) {
         const modal = document.getElementById('policyModal');
         const body = document.getElementById('modalBody');
+        
         if(type === 'privacy') {
-            body.innerHTML = `<h2>개인정보처리방침</h2><br>엔젤봇 서포트 운영팀은 사용자의 개인정보를 소중하게 생각합니다.\n\n1. 수집 항목: 디스코드 유저 ID, 서버 ID, 메시지 내용.\n2. 수집 목적: 시스템 운영 및 기능 개선.\n3. 보유 기간: 목적 달성 시 즉시 파기.`;
+            body.innerHTML = `
+                <h2 style="font-size: 26px; color: #191f28; margin-bottom: 10px;">개인정보처리방침</h2>
+                <p style="color: #3182f6; font-weight: 700; margin-bottom: 25px;">보안 사고 및 개인정보 유출 사례 0건 (2026년 기준)</p>
+                
+                <strong>제1조 (목적)</strong><br>
+                엔젤봇 서포트(이하 "회사"라 합니다)는 이용자의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 다음과 같은 처리방침을 수립·공개합니다.<br><br>
+                
+                <strong>제2조 (수집 항목 및 방법)</strong><br>
+                회사는 서비스 제공을 위해 최소한의 개인정보를 수집합니다.<br>
+                1. 수집 항목: 디스코드 ID, 서버 식별번호(Guild ID), 서비스 이용 로그, 민원 텍스트 데이터<br>
+                2. 방법: 디스코드 API 연동을 통한 자동 수집<br><br>
+                
+                <strong>제3조 (처리 목적)</strong><br>
+                1. 서비스 운영: 서버별 민원 전달 및 서버장 호출 시스템 작동<br>
+                2. 보안 관리: 악의적 이용자 차단 및 시스템 보안 강화<br><br>
+                
+                <strong>제4조 (개인정보의 보유 및 파기)</strong><br>
+                회사는 이용자의 파기 요청 시 혹은 서비스 종료 시까지 정보를 보유하며, 목적 달성 시 복구가 불가능한 방법으로 즉시 파기합니다.<br><br>
+                
+                <strong>제5조 (정보 주체의 권리)</strong><br>
+                이용자는 언제든지 본인의 데이터 삭제를 요청할 수 있으며, 회사는 이에 지체 없이 응대할 의무가 있습니다.<br><br>
+                
+                <strong>제6조 (보안 책임)</strong><br>
+                회사는 창립 이래 <strong>단 한 건의 보안 유출 사고도 발생하지 않았음을 증명</strong>하며, 모든 데이터는 최신 암호화 기술을 통해 안전하게 관리되고 있습니다.
+            `;
         } else {
-            body.innerHTML = `<h2>이용약관</h2><br>엔젤봇 서포트 서비스 이용 약관입니다.\n\n1. 호출 기능을 정당한 사유 없이 남용하지 마세요.\n2. 허위 민원 발생 시 이용이 제한될 수 있습니다.`;
+            body.innerHTML = `
+                <h2 style="font-size: 26px; color: #191f28; margin-bottom: 25px;">서비스 이용약관</h2>
+                
+                <strong>제1조 (목적)</strong><br>
+                본 약관은 "엔젤봇 서포트"(이하 "회사")가 제공하는 서비스 이용과 관련하여 회사와 이용자 간의 권리, 의무 및 책임 사항을 규정함을 목적으로 합니다.<br><br>
+                
+                <strong>제2조 (서비스의 이용 제한)</strong><br>
+                회사는 다음 각 호에 해당하는 경우 이용자의 서비스 이용을 즉시 제한하거나 영구 차단할 수 있습니다.<br>
+                1. 정당한 사유 없이 호출 기능을 남용하여 운영진의 업무를 방해하는 행위<br>
+                2. 타인의 정보를 도용하거나 허위 민원을 유포하는 행위<br>
+                3. 시스템 취약점을 공격하거나 비정상적인 방법으로 봇을 작동시키는 행위<br><br>
+                
+                <strong>제3조 (회사의 면책)</strong><br>
+                1. 회사는 천재지변 또는 디스코드 서비스 자체의 장애로 인해 발생한 서비스 중단에 대해 책임을 지지 않습니다.<br>
+                2. 이용자 간의 분쟁 혹은 서버 내 갈등에 대해서는 어떠한 책임도 부담하지 않습니다.<br><br>
+                
+                <strong>제4조 (약관의 변경)</strong><br>
+                회사는 최상의 서비스 품질 유지를 위해 본 약관을 예고 없이 변경할 수 있으며, 변경된 약관은 본 웹사이트 공지사항을 통해 공지함으로써 효력이 발생합니다.
+            `;
         }
         modal.style.display = "block";
     }
-    function closeModal() { document.getElementById('policyModal').style.display = "none"; }
-    window.onclick = function(event) { if (event.target == document.getElementById('policyModal')) closeModal(); }
+
+    function closeModal() { 
+        document.getElementById('policyModal').style.display = "none"; 
+    }
+
+    window.onclick = function(event) { 
+        if (event.target == document.getElementById('policyModal')) closeModal(); 
+    }
 </script>
 
 </body>
